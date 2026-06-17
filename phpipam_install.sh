@@ -50,6 +50,8 @@ sudo sed -i "s|define('BASE', \"/\");|define('BASE', \"/\");|" $CONFIG_FILE
 sudo chown -R www-data:www-data /var/www/html/phpipam
 sudo chown -R 755 /var/www/html/phpipam
 
+sudo mysql -u root -p $db_name < /var/www/html/phpipam/db/SCHEME.SQL    # Ici mettre à jour le chemin vers SCHEMA.SQL qui se trouve dan le dossier phpipam
+
 sudo systemctl restart apache2
 
 VHOST_FILE="/etc/apache2/sites-available/000-default.conf"
