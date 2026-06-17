@@ -23,7 +23,7 @@ fi
 
 
 echo -e "\n======Sécurisation de la db =======\n"
-sudo mysql_secure_intallation
+sudo mysql_secure_installation
 
 
 echo -e "\n====== Création de la db et accès Root User=======\n"
