@@ -27,7 +27,7 @@ sudo apt install php-mysql libapache2-mod-php php-gd php-ldap php-curl php-gmp p
 
 sudo systemctl enable --now apache2
 
-sudo git clone --recursive https://github.com/phpipam/phpipam.git /var/www/html/
+sudo git clone --recursive https://github.com/phpipam/phpipam.git /var/www/html/phpipam
 
 cd /var/www/html/phpipam/
 sudo git submodule update --init --recursive
