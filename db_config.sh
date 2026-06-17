@@ -41,7 +41,7 @@ EOF
 
 echo -e "===========Vérification de la création =======\n"
 sudo mysql -u root -e "SHOW DATABASES LIKE '$db_name';"
-sudo mysql -u root -e "SELECT USER, HOST FROM mysql.user='$db_username';"
+sudo mysql -u root -e "SELECT USER, HOST FROM mysql.user = $db_username;"
 
 
 echo -e "\n Base de données $db_name et user $db_username crées avec succès.\n"
