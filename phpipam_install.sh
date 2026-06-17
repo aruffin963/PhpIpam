@@ -44,6 +44,7 @@ sudo sed -i "s|\$db\['user'\] = .*;|\$db['user'] = '$username';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['pass'\] = .*;|\$db['pass'] = '$password';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['name'\] = .*;|\$db['name'] = '$database';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['name'\] = .*;|\$db['name'] = '$database';|" $CONFIG_FILE
+sudo sed -i "s|define('BASE', \"/\");|define('BASE', \"/\");|" $CONFIG_FILE
 
 
 sudo chown -R www-data:www-data /var/www/html/phpipam
@@ -70,7 +71,7 @@ sudo bash -c "cat > $VHOST_FILE" <<EOF
 EOF
 
 sudo a2enmod rewrite
-sudo systemctl restart apache2
+sudo systemctl restart apache2.service
 
 
 
