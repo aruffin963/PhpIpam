@@ -27,14 +27,17 @@ sudo apt install php-mysql libapache2-mod-php php-gd php-ldap php-curl php-gmp p
 
 sudo systemctl enable --now apache2
 
+DIR = "/var/www/html/phpipam/"
 
-cd /var/www/html/
+cd $DIR
 
 sudo git clone --recursive https://github.com/phpipam/phpipam.git
 
 sudo git submodule update --init --recursive
 
-sudo cp config.dist.php config.php
+cd $DIR
+
+sudo cp $DIR/config.dist.php config.php
 
 CONFIG_FILE="/var/www/html/phpipam/config.php"
 
