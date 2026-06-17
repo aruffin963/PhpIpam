@@ -55,8 +55,12 @@ sudo mysql -u root -p $db_name < /var/www/html/phpipam/db/SCHEME.SQL    # Ici me
 sudo systemctl restart apache2
 
 VHOST_FILE="/etc/apache2/sites-available/000-default.conf"
+WEB_PATH="/var/www/html/phpipam"
 
-sudo bash -c "cat > $VHOST_FILE" <<EOF
+if grep -q "$WEB_PATH" "$VHOST_FILE"; then
+    ech -ne "\n dossier déjà existant"
+else
+    sudo bash -c "cat > $VHOST_FILE" <<EOF
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
     DocumentRoot /var/www/html/phpipam
@@ -71,10 +75,10 @@ sudo bash -c "cat > $VHOST_FILE" <<EOF
     CustomLog \${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 EOF
+sudo systemctl reload apache2.service
+fi
 
 sudo a2enmod rewrite
 sudo systemctl restart apache2.service
 
-
-
-sudo curl localhost/phpipam
+sudo curl http://localhost/phpipam
