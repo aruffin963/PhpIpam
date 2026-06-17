@@ -23,6 +23,8 @@ sudo apt install wget curl net-tools git
 
 sudo apt install -y apache2 php php-cli libapache2-mod-php
 
+sudo apt install php7.4 php7.4-mysql libapache2-mod-php php7.4-gd php7.4-ldap php7.4-curl php7.4-gmp php7.4-xml php7.4-mbstring git -y
+
 sudo systemctl enable --now apache2
 
 
@@ -31,4 +33,18 @@ cd /var/www/html/
 sudo git clone --recursive https://github.com/phpipam/phpipam.git
 
 sudo git submodule update --init --recursive
+
 sudo cp config.dist.php config.php
+
+CONFIG_FILE="/var/www/html/phpipam/config.php"
+
+sudo sed -i "s|\$db\['host'\] = .*;|\$db['host'] = '127.0.0.1';|" $CONFIG_FILE
+sudo sed -i "s|\$db\['user'\] = .*;|\$db['user'] = '$username';|" $CONFIG_FILE
+sudo sed -i "s|\$db\['pass'\] = .*;|\$db['pass'] = '$password';|" $CONFIG_FILE
+sudo sed -i "s|\$db\['name'\] = .*;|\$db['name'] = '$database';|" $CONFIG_FILE
+
+
+sudo chown -R www-data:www-data /var/www/html/phpipam
+sudo chown -R 755 /var/www/html/phpipam
+
+sudo systemctl restart apache2
