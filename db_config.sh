@@ -31,7 +31,10 @@ echo -e "\n====== Création de la db et accès Root User=======\n"
 sudo mysql -u root -p <<EOF
 DROP DATABASE IF EXISTS ${db_name};
 CREATE DATABASE IF NOT EXISTS ${db_name};
-GRANT ALL PRIVILEGES on ${db_name}.* to ${db_username}@localhost IDENTIFIED BY ${db_password};
+
+DROP USER IF EXISTS ${db_username}@localhost;
+CREATE USER ${db_username}@localhost  IDENTIFIED BY ${db_password};
+GRANT ALL PRIVILEGES on ${db_name}.* to ${db_username}@localhost;
 FLUSH PRIVILEGES;
 EXIT;
 EOF
