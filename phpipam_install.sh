@@ -42,9 +42,35 @@ sudo sed -i "s|\$db\['host'\] = .*;|\$db['host'] = '127.0.0.1';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['user'\] = .*;|\$db['user'] = '$username';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['pass'\] = .*;|\$db['pass'] = '$password';|" $CONFIG_FILE
 sudo sed -i "s|\$db\['name'\] = .*;|\$db['name'] = '$database';|" $CONFIG_FILE
+sudo sed -i "s|\$db\['name'\] = .*;|\$db['name'] = '$database';|" $CONFIG_FILE
 
 
 sudo chown -R www-data:www-data /var/www/html/phpipam
 sudo chown -R 755 /var/www/html/phpipam
 
 sudo systemctl restart apache2
+
+VHOST_FILE="/etc/apache2/sites-available/000-default.conf"
+
+sudo bash -c "cat > $VHOST_FILE" <<EOF
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html/phpipam
+
+    <Directory /var/www/html/phpipam>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog \${APACHE_LOG_DIR}/error.log
+    CustomLog \${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+
+sudo a2znmod rewrite
+sudo systemctl restart apache2
+
+
+
+sudo curl localhost/phpipam
