@@ -23,7 +23,7 @@ sudo apt install wget curl net-tools git
 
 sudo apt install -y apache2 php php-cli libapache2-mod-php
 
-sudo apt install php7.4 php7.4-mysql libapache2-mod-php php7.4-gd php7.4-ldap php7.4-curl php7.4-gmp php7.4-xml php7.4-mbstring git -y
+sudo apt install php-mysql libapache2-mod-php php-gd php-ldap php-curl php-gmp php-xml php-mbstring git -y
 
 sudo systemctl enable --now apache2
 
