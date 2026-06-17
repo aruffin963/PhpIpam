@@ -69,7 +69,7 @@ sudo bash -c "cat > $VHOST_FILE" <<EOF
 </VirtualHost>
 EOF
 
-sudo a2znmod rewrite
+sudo a2enmod rewrite
 sudo systemctl restart apache2
 
 
