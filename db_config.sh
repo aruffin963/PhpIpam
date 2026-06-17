@@ -34,7 +34,7 @@ CREATE DATABASE IF NOT EXISTS $db_name;
 
 DROP USER IF EXISTS '$db_username'@'localhost';
 CREATE USER '$db_username'@'localhost' IDENTIFIED BY '$db_password';
-GRANT ALL PRIVILEGES ON $db_name.* TO '$db_username@'localhost';
+GRANT ALL PRIVILEGES ON $db_name.* TO '$db_username'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;
 EOF
@@ -44,7 +44,7 @@ sudo mysql -u root -e "SHOW DATABASES LIKE '$db_name';"
 sudo mysql -u root -e "SELECT USER, HOST FROM mysql.user='$db_username';"
 
 
-echo -e "\n Base de données '$db_name' et user '$db_username' crées avec succès.\n"
+echo -e "\n Base de données $db_name et user $db_username crées avec succès.\n"
 
 
 sudo mysql -u root -p $db_name < db/SCHEME.SQL    # Ici mettre à jour le chemin vers SCHEMA.SQL qui se trouve dan le dossier phpipam
